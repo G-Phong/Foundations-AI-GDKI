@@ -1,0 +1,85 @@
+ if i <= 2:
+            if conf[i] == '' and conf[i] == conf[i+1]:
+                bool containsOne, containsTwo, containsThree, containsFour = False
+                
+                for j in range(0,len(hilfsliste)):
+                    if hilfsliste[j] == 1:
+                        containsOne = True
+                    if hilfsliste[j] == 2:
+                        containsTwo = True
+                    if hilfsliste[j] == 3:
+                        containsThree = True
+                    if hilfsliste[j] == 4:
+                        containsFour = True
+                   
+                        
+            if containsOne == False:
+                new_proposition = field_var(i+1,1) + " & " + field_var(i,2)
+                kb.append(new_proposition)
+            if containsTwo == False:
+                new_proposition = field_var(i+1,2) + " & " + field_var(i,3)
+                kb.append(new_proposition)
+            if containsThree == False:
+                new_proposition = field_var(i+1,3) + " & " + field_var(i,4)
+                kb.append(new_proposition)
+            if containsFour == False:
+                new_proposition = field_var(i+1,1) + " & " + field_var(i,2)
+                kb.append(new_proposition)
+                
+        else:
+            if conf[i] == '' and conf[0] == ''
+                new_proposition = field_var(0,vor) + " & " + field_var(i,goesAfter(a,b,c))
+                kb.append(new_proposition)
+
+
+
+
+
+
+
+from field_var import field_var
+
+def goesAfter(Auto1, Auto2, Auto3):
+    pass
+
+def generate_knowledge(conf):
+    #conf is a list, e.g. ['right of way', 'empty', '', '']
+    #field_var(n,x) entspricht V_n,x 
+    #e.g. field_var(2,0) -> vehicle 2 (top) does not exist
+    # e.g. field_var(0,1) -> vehicle 0 (bottom) drives first
+    
+    kb = [] 
+    hilfsliste = []
+    k = 0
+    
+    for i in range(0,4):
+        if conf[i] == 'empty':
+            new_proposition = field_var(i,0) # Vi0 
+            kb.append(new_proposition)
+            k = k+1
+
+    #1st rule: Right-of-Way sign (Vorfahrtsstraße) -> drives BEFORE ALL other vehicles
+        if conf[i] == 'right of way':
+            new_proposition = field_var(i,1) #vehicle i drives FIRST
+            kb.append(new_proposition)
+            hilfsliste.append(i)
+            
+
+    #2nd rule: Stop Sign -> driver AFTER all other vehicles
+        if conf[i] == 'stop':
+            new_proposition = field_var(i,4-k) #vehicle i drives LAST
+            kb.append(new_proposition)
+           
+
+    #3rd rule: If 2 vehicles have no signs -> Right before Left
+        if conf[i+1] == 'empty' and conf[i] != 'stop':
+            new_proposition = field_var(i, 
+            hilfsliste.append(i)
+                                        
+       
+
+    #4th rule: No two vehicles pass at the same time
+#         vehicle_solution = [a,b,c,d] -> kein Wert in der Liste darf gleich sein!! Bedingung enthalten in Regel 1,2,3
+
+#       print(conf[i]) #print() zum Testen -> Ausgabe in Logic_Exercise.ipynb ganz unten unter "feed..."
+    return kb
